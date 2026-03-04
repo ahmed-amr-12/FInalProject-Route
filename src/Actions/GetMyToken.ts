@@ -6,8 +6,9 @@ import { cookies } from "next/headers"
 export async function GetMyToken() {
 
   const myCookies = await cookies()
-  const TokenFromCookies = myCookies.get("next-auth.session-token")?.value
-
+const TokenFromCookies =
+  myCookies.get("next-auth.session-token")?.value ||
+  myCookies.get("__Secure-next-auth.session-token")?.value;
   console.log("TokenFromCookies", TokenFromCookies);
 
   const decodedToken = await decode({
