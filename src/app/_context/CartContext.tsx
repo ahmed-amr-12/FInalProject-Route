@@ -4,7 +4,7 @@ import { getCartData } from '@/Actions/getCartData';
 import React, { createContext, useEffect, useState } from 'react'
 
 
- export let CartContext = createContext({})
+export let CartContext = createContext<any>({})
 
 export default function CartContextProvider({children}: {children: React.ReactNode}) {
 
