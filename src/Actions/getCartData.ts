@@ -16,7 +16,7 @@ export async function getCartData() {
       `https://ecommerce.routemisr.com/api/v1/cart`,
       {
         headers: {
-          token: token,
+          token: token as string,
         },
       }
     );
