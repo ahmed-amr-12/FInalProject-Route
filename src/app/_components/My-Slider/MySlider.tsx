@@ -10,11 +10,12 @@ import img1 from "../../../../public/img/8f9ee8f41cc2d72369a71134d471b443.jpg";
 import img2 from "../../../../public/img/a254ab3176f62d952a39db1c7a2a6a2b.jpg";
 import img3 from "../../../../public/img/56279cf36064fa5f80f43268aff774c8.jpg";
 import img4 from "../../../../public/img/ba18c6554999efb66aa1386b7179a207.jpg";
+import { StaticImageData } from "next/image";
+
 
 type Props = {
-  imglist: string[];
+  imglist: (string | StaticImageData)[];
 };
-
 export default function MySlider({ imglist = [] }: Props) {
   return (
     <Swiper
