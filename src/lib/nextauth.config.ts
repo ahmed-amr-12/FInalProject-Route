@@ -47,8 +47,7 @@ export const nextAuthConfig: NextAuthOptions = {
   callbacks: {
     jwt(params) {
       if (params.user) {
-        params.token.realTokenFromApi = params.user.realTokenFromApi ;
-      }
+params.token.realTokenFromApi = (params.user as any).realTokenFromApi;      }
       console.log("params", params);
 
       return params.token;
