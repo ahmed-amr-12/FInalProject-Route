@@ -1,4 +1,4 @@
- export default async function GetAllGategories(details: any) {
+ export default async function GetAllGategories() {
 
 
        let res = await fetch(`https://ecommerce.routemisr.com/api/v1/categories/`, {method: 'GET' , next: {revalidate: 30}}
