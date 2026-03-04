@@ -16,7 +16,7 @@ export async function AddItemToCarts(productId: string) {
       { productId },
       {
         headers: {
-          token: token,
+          token: token as string 
         },
       }
     );
