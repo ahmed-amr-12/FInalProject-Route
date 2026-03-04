@@ -10,7 +10,7 @@ const token =  await GetMyToken()
 
 
 
-const userData = jwtDecode(token as string)
+const userData = jwtDecode<any>(token as string)
 
 const {data} =await axios.get(`https://ecommerce.routemisr.com/api/v1/orders/user/${userData.id}`,)
 
