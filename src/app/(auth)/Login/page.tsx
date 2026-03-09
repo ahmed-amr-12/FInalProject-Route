@@ -1,17 +1,17 @@
+
 "use client";
+
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-// import { LoginSchema } from "@/app/schemas/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, LoginType } from "./../../schemas/LoginSchema";
-import { MyLogin } from "@/Actions/Loginn";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Toast } from "radix-ui";
 
 export default function Login() {
+
   const form = useForm({
     defaultValues: {
       email: "",
@@ -19,11 +19,14 @@ export default function Login() {
     },
     resolver: zodResolver(LoginSchema),
   });
+
   const router = useRouter();
   const [authError, setAuthError] = useState("");
 
   async function handleLogin(values: LoginType) {
+
     if (values.email && values.password) {
+
       const res = await signIn("credentials", {
         email: values.email,
         password: values.password,
@@ -31,33 +34,41 @@ export default function Login() {
       });
 
       if (res?.error) {
-        // Toast.error("Invalid email or password", { position: "top-center" });
+        setAuthError("Invalid email or password");
       } else {
-        // Toast.success("Welcome back!", { position: "top-center" });
         router.push("/");
         router.refresh();
       }
+
     }
-    
   }
 
   return (
-    <>
-      <h1>Login</h1>
-      <div className="max-w-5xl mx-auto bg-blue-800 p-5 ">
-        <form onSubmit={form.handleSubmit(handleLogin)} action="">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border">
+
+        <h1 className="text-3xl font-bold text-center mb-8">
+          Welcome Back
+        </h1>
+
+        <form
+          onSubmit={form.handleSubmit(handleLogin)}
+          className="space-y-5"
+        >
+
           <Controller
             name="email"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>Email </FieldLabel>
+                <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+
                 <Input
                   {...field}
                   id={field.name}
                   aria-invalid={fieldState.invalid}
-                  placeholder="Login button not working on mobile"
-                  autoComplete="off"
+                  placeholder="Enter your email"
                 />
 
                 {fieldState.invalid && (
@@ -73,13 +84,13 @@ export default function Login() {
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+
                 <Input
                   type="password"
                   {...field}
                   id={field.name}
                   aria-invalid={fieldState.invalid}
-                  placeholder="Login button not working on mobile"
-                  autoComplete="off"
+                  placeholder="Enter your password"
                 />
 
                 {fieldState.invalid && (
@@ -90,16 +101,23 @@ export default function Login() {
           />
 
           {authError && (
-            <div className="text-red-500 my-2" role="alert">
+            <div className="text-red-500 text-sm text-center">
               {authError}
             </div>
           )}
 
-          <button className="cursor-pointer my-3 w-full text-2xl bg-black text-white rounded rounded-3xl p-3">
-            login
+          <button
+            type="submit"
+            className="w-full h-11 bg-green-600 hover:bg-green-700 transition text-white font-semibold rounded-xl cursor-pointer"
+          >
+            Login
           </button>
+
         </form>
+
       </div>
-    </>
+
+    </div>
   );
 }
+

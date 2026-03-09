@@ -188,7 +188,41 @@
 .swiper-pagination {
 position: static !important;
 }
-
+/* 
 body{
   background-color:#3d4450
+} */
+
+body{
+  background:#f8fafc;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5f5;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+img{
+  border-radius: 12px;
+}
+
+.card-hover{
+  transition: all .3s ease;
+}
+
+.card-hover:hover{
+  transform: translateY(-5px);
 }
