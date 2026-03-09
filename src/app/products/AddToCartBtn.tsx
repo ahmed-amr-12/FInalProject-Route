@@ -5,12 +5,23 @@ import { Button } from "@/components/ui/button";
 import React, { useContext } from "react";
 import { toast } from "sonner";
 import { CartContext } from "../_context/CartContext";
+import { useSession } from "next-auth/react";
 
 export default function AddToCartBtn({ productId }: { productId: string }) {
-  const { cartData , setCartData, numOfCartItems, setNumOfCartItems } =
+  const { cartData, setCartData, numOfCartItems, setNumOfCartItems } =
     useContext(CartContext);
 
+  const { status } = useSession();
+
   async function HandleAddItem() {
+
+    if (status !== "authenticated") {
+      toast.error("Please login first", {
+        position: "top-center",
+      });
+      return;
+    }
+
     const data = await AddItemToCarts(productId);
 
     if (data.status == "success") {
@@ -28,10 +39,10 @@ export default function AddToCartBtn({ productId }: { productId: string }) {
     <>
       <Button
         onClick={HandleAddItem}
-        className=" text-white  bg-slate-800"
+        className="text-white bg-slate-800"
         variant="outline"
       >
-        <i className="fa-solid fa-plus bg"></i> Add To Cart
+        <i className="fa-solid fa-plus"></i> Add To Cart
       </Button>
     </>
   );
